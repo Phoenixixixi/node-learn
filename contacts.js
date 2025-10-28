@@ -1,6 +1,7 @@
 const fs = require('fs')
 const readline = require('readline')
 
+//instalaton readline for command
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
