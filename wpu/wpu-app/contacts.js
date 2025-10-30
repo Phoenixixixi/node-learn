@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const fs = require('fs')
 const readline = require('readline')
 
@@ -27,10 +28,15 @@ const tulisPertanyaan = (pertanyaan) => {
   })
 }
 
-const simpanContact = (nama, HP, email) => {
-  const contact = { nama, HP, email }
+const loadContact = () => {
   const file = fs.readFileSync('./data/contact.json', 'utf-8')
   const contacts = JSON.parse(file)
+  return contacts
+}
+
+const simpanContact = (nama, HP, email) => {
+  const contact = { nama, HP, email }
+  const contacts = loadContact()
 
   //cek duplikat
   const duplikat = contacts.find((contact) => contact.nama === nama)
@@ -49,4 +55,44 @@ const simpanContact = (nama, HP, email) => {
   rl.close()
 }
 
-module.exports = { tulisPertanyaan, simpanContact }
+const listContact = () => {
+  const contacts = loadContact()
+  contacts.map((contact, index) =>
+    console.log(`${index + 1} - ${contact.nama} - ${contact.HP}`)
+  )
+}
+
+const detailContact = (nama) => {
+  const contacs = loadContact()
+  const contact = contacs.find(
+    (contact) => contact.nama.toLowerCase() === nama.toLowerCase()
+  )
+  if (!contact) {
+    console.log(chalk.red('nama tidak ditemukan'))
+    return false
+  }
+  console.log(`detail : ${contact.nama} ${contact.HP} ${contact.email}`)
+}
+
+const deleteContact = (nama) => {
+  const contacs = loadContact()
+  const newContact = contacs.filter(
+    (contact) => contact.nama.toLowerCase() !== nama.toLowerCase()
+  )
+
+  if (contacs.length === newContact.length) {
+    console.log(chalk.red('nama tidak ditemukan'))
+    return false
+  }
+  fs.writeFileSync('data/contact.json', JSON.stringify(newContact))
+
+  console.log(`${nama} berhasil dihapus`)
+}
+
+module.exports = {
+  tulisPertanyaan,
+  simpanContact,
+  listContact,
+  detailContact,
+  deleteContact,
+}
