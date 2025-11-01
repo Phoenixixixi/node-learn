@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 Not Found</title>
+    <style>
+      :root {
+        --bg: #000; /* hitam */
+        --fg: #eaeaea; /* teks utama */
+        --muted: #9aa0a6; /* teks sekunder */
+        --accent: #00e5ff; /* aksen */
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Reset ringan */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Noto Sans, Arial, sans-serif;
+        display: grid;
+        place-items: center;
+        line-height: 1.4;
+      }
+
+      .wrap {
+        text-align: center;
+        padding: 2rem;
+        max-width: 720px;
+        width: 100%;
+      }
+
+      .code {
+        font-size: clamp(64px, 18vw, 180px);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        margin: 0;
+        position: relative;
+        text-shadow: 0 0 12px rgba(0, 229, 255, 0.25),
+          0 0 40px rgba(0, 229, 255, 0.15);
+      }
+
+      /* Garis aksen di bawah angka 404 */
+      .code::after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 140px;
+        margin: 0.5rem auto 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.6));
+      }
+
+      .title {
+        margin: 1rem 0 0.5rem;
+        font-size: clamp(18px, 3.6vw, 28px);
+        font-weight: 700;
+      }
+
+      .desc {
+        margin: 0 auto 1.5rem;
+        font-size: clamp(14px, 2.8vw, 16px);
+        color: var(--muted);
+        max-width: 56ch;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 1.2rem;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+        background: var(--accent);
+        border: 0;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+        transition: transform 0.12s ease, filter 0.2s ease;
+        cursor: pointer;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      /* Prefer-reduced-motion: non-anim */
+      @media (prefers-reduced-motion: reduce) {
+        .btn {
+          transition: none;
+        }
+        .code {
+          text-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap" role="main" aria-labelledby="title">
+      <h1 class="code" aria-hidden="true">404</h1>
+      <h2 id="title" class="title">Not Found</h2>
+      <p class="desc">
+        Maaf, halaman yang kamu cari tidak ditemukan atau sudah dipindahkan.
+      </p>
+      <a class="btn" href="/">Kembali ke Beranda</a>
+    </main>
+  </body>
+</html>
