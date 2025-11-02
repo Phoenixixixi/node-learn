@@ -1,17 +1,32 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const expressLayouts = require('express-ejs-layouts')
 const PORT = 3003
 
 //gunakan ejs
 app.set('view engine', 'ejs')
+app.use(expressLayouts)
 
 app.get('/', (req, res) => {
-  res.render('index')
+  const mahasiswa = [
+    // {
+    //   nama: 'budi',
+    //   email: 'budi@gmail.com',
+    // },
+    // {
+    //   nama: 'ujang',
+    //   email: 'ujang@gmail.com',
+    // },
+  ]
+  res.render('index', { nama: 'Dustin', title: 'Halaman Home', mahasiswa })
 })
 
 app.get('/about', (req, res) => {
-  res.sendFile('./public/about.html', { root: __dirname })
+  res.render('about', { title: 'halaman about' })
+})
+app.get('/contact', (req, res) => {
+  res.render('contact', { title: 'halaman contact' })
 })
 app.get('/contact', (req, res) => {
   res.send('hello world about')
@@ -37,7 +52,8 @@ app.use('/', (req, res) => {
   //     nama: 'dustin',
   //     email: 'dastin@gmail.com',
   //   })
-  res.sendFile('./public/404.html', { root: __dirname })
+  res.status(404)
+  res.render('404')
 })
 
 app.listen(PORT, () => {

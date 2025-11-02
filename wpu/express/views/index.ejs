@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link rel="stylesheet" href="/style.css" />
+    <title><%= title %></title>
   </head>
   <body>
     <section class="container">
       <h1>Selamat Datang di Home Page</h1>
+
+      <h2>Hallo <%= nama %></h2>
+
+      <h4>Daftar mahasiswa</h4>
+
+      <% if(mahasiswa.length < 1) {%>
+      <h2>Data mahasiswa masih kosong</h2>
+      <% } %>
+
+      <ul class="show-name">
+        <% mahasiswa.forEach(element => { %>
+        <li><%= element.nama %></li>
+        <li><%= element.email %></li>
+        <% }) %>
+      </ul>
+
       <p>
         Ini adalah halaman utama dari website sederhana menggunakan Node.js &
         Express.
